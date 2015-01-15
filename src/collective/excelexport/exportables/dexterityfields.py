@@ -220,6 +220,8 @@ class ChoiceFieldRenderer(BaseFieldRenderer):
                 term = vocabulary.getTermByToken(value)
             except LookupError:
                 term = None
+            except AttributeError:
+                term = None
         else:
             term = None
 
@@ -270,8 +272,6 @@ class TextFieldRenderer(BaseFieldRenderer):
             return ""
 
         text = safe_unicode(self._get_text(value))
-        if len(text) > 50:
-            return text[:47] + u"..."
 
         return text
 
